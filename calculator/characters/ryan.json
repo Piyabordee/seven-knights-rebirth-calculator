@@ -1,0 +1,44 @@
+{
+    "_character": "Ryan",
+    "_rarity": "legend",
+    "_class": "attack",
+    "_source": "https://gamewith.net/sevenknights-rebirth/71645",
+    "_element": "Dark",
+    "// ===== Passive: Demonic Swordsman (ใช้ทั้งสองสกิล) =====": "",
+    "BUFF_ATK": 0.00,
+    "CRIT_DMG": 0.00,
+    "DMG_AMP_BUFF": 31.00,
+    "WEAK_DMG": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill1": {
+            "_name": "Gale Slash (สกิลบน)",
+            "SKILL_DMG": 170.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "WEAK_SKILL_DMG": 270.00,
+            "Lost_HP_Bonus": 50.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        },
+        "skill2": {
+            "_name": "Go for the Head (สกิลล่าง)",
+            "SKILL_DMG": 155.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายโจมตี → ATK_BASE = 1500",
+        "Skill 1 (บน - Gale Slash): 170% (Enhanced), ติดจุดอ่อน +270% extra damage",
+        "  - Damage เพิ่มได้ถึง 50% ตาม HP ที่เสียไป (Lost HP Bonus)",
+        "  - T2: Ignore DEF, T6: เพิ่มดาเมจ Weakness Hit +100%",
+        "Skill 2 (ล่าง - Go for the Head): 155% (Enhanced), 100% Blind",
+        "  - T4: Ignore DEF, T6: Physical Damage Immunity 2 turns",
+        "Passive: Triple-Target ATK DMG +31% (Enhanced) = DMG_AMP_BUFF",
+        "*** ค่าทั้งหมดเป็น Enhanced แล้ว ***"
+    ]
+}

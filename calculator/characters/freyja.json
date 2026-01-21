@@ -1,0 +1,43 @@
+{
+    "_character": "Freyja",
+    "_rarity": "legend",
+    "_class": "magic",
+    "_source": "https://gamewith.net/sevenknights-rebirth/71863",
+    "_element": "Light",
+    "// ===== Passive: Magnificent Authority (ใช้ทั้งสองสกิล) =====": "",
+    "BUFF_ATK": 30.00,
+    "CRIT_DMG": 0.00,
+    "DMG_AMP_BUFF": 0.00,
+    "WEAK_DMG": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill1": {
+            "_name": "Golden Rain (สกิลบน)",
+            "SKILL_DMG": 80.00,
+            "SKILL_HITS": 2,
+            "Ignore_DEF": 40.00,
+            "HP_Alteration": 39.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        },
+        "skill2": {
+            "_name": "Noble Storm (สกิลล่าง)",
+            "SKILL_DMG": 67.00,
+            "SKILL_HITS": 2,
+            "Ignore_DEF": 0.00,
+            "DEF_REDUCE": 44.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายเวท → ATK_BASE = 1500",
+        "Skill 1 (บน - Golden Rain): 80% x2 (Enhanced), 40% Ignore DEF, HP Alteration 39% (ต้องมี 4 Divinity stacks)",
+        "Skill 2 (ล่าง - Noble Storm): 67% x2 (Enhanced), DEF Reduce 11% x4 stacks max = 44%, 75% Bleed chance",
+        "Passive: BUFF_ATK +5% per Divinity stack (max 6 = 30%), T2: เริ่มต้นด้วย 4 Divinity stacks",
+        "Passive: Effect Hit Rate +37% (Enhanced) ถ้ามี Magic hero 3+ ตัว",
+        "Transcend 2: เริ่มต้นด้วย 4 Divinity stacks → สามารถใช้ HP Alteration ได้ทันที",
+        "*** ค่าทั้งหมดเป็น Enhanced แล้ว ***"
+    ]
+}

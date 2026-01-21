@@ -1,0 +1,36 @@
+{
+    "_character": "Rachel",
+    "_rarity": "legend",
+    "_class": "balance",
+    "_source": "https://gamewith.net/sevenknights-rebirth/70604",
+    "_element": "Fire",
+    "// ===== Passive (ใช้ทั้งสองสกิล) =====": "",
+    "BUFF_ATK": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill2": {
+            "_name": "Phoenix Strike (สกิลบน)",
+            "SKILL_DMG": 160.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00,
+            "DEF_REDUCE": 29.00,
+            "DMG_AMP_DEBUFF": 28.00
+        },
+        "skill1": {
+            "_name": "Flame Strike (สกิลล่าง)",
+            "SKILL_DMG": 102.00,
+            "SKILL_HITS": 2,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายสมดุล → ATK_BASE = 1306",
+        "Skill 2 (บน): 160%, DEF Reduction 29% → 36% (Transcend), Physical Vulnerability 22% → 28%",
+        "Passive: Weakness Hit Chance Boost +22% (ไม่ใช่ Damage - ไม่นับ)"
+    ]
+}

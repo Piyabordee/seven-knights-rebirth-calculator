@@ -1,0 +1,44 @@
+{
+    "_character": "Teo",
+    "_rarity": "legend",
+    "_class": "attack",
+    "_source": "https://gamewith.net/sevenknights-rebirth/70499",
+    "_element": "Dark",
+    "// ===== Passive: Crow's Eyes (ใช้ทั้งสองสกิล) =====": "",
+    "BUFF_ATK": 0.00,
+    "CRIT_DMG": 0.00,
+    "DMG_AMP_BUFF": 0.00,
+    "WEAK_DMG": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill1": {
+            "_name": "Corvus Eclipse (สกิลบน)",
+            "SKILL_DMG": 65.00,
+            "SKILL_HITS": 2,
+            "Ignore_DEF": 0.00,
+            "Bonus_Crit_Rate": 100.00,
+            "Bonus_Crit_DMG": 85.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        },
+        "skill2": {
+            "_name": "Talon Strike (สกิลล่าง)",
+            "SKILL_DMG": 170.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "Bonus_Crit_Rate": 100.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายโจมตี → ATK_BASE = 1500",
+        "Skill 1 (บน - Corvus Eclipse): 65% x2 (Enhanced), +100% Crit Rate (T6), +85% Crit DMG (Enhanced)",
+        "  - Buff Duration Reduction 2 turns",
+        "Skill 2 (ล่าง - Talon Strike): 170% (Enhanced), +100% Crit Rate (T6)",
+        "Passive: All Damage Nullification 3 hits, Immortality on death (T2)",
+        "  - T4: +39% ATK Boost when Immortality triggered",
+        "*** ค่าทั้งหมดเป็น Enhanced + T6 แล้ว ***"
+    ]
+}

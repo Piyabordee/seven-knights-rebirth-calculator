@@ -1,0 +1,10 @@
+{
+    "_mode": "normal",
+    "_name": "ปกติ (ใช้ค่าจาก config.json)",
+    "DEF_Target": null,
+    "HP_Target": null,
+    "Target_HP_Percent": null,
+    "DMG_Reduction": null,
+    "DEF_BUFF": null,
+    "_note": "ค่า null = ใช้ค่าจาก config.json"
+}

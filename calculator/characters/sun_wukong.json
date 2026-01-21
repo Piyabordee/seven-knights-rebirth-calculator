@@ -1,0 +1,65 @@
+{
+    "_character": "Sun Wukong",
+    "_rarity": "legend",
+    "_class": "balance",
+    "_source": "https://gamewith.net/sevenknights-rebirth/71935",
+    "_element": "Fire",
+    "// ===== Passive: Final Clone (ใช้ทั้งสองสกิล) =====": "",
+    "BUFF_ATK": 0.00,
+    "CRIT_DMG": 0.00,
+    "DMG_AMP_BUFF": 0.00,
+    "WEAK_DMG": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill1": {
+            "_name": "Clone Beatdown: Specter (สกิลบน - Clone)",
+            "SKILL_DMG": 82.00,
+            "SKILL_HITS": 3,
+            "Ignore_DEF": 40.00,
+            "Bonus_Crit_Rate": 100.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00,
+            "_notes": "Block Rate Reduction 33%, DMG Boost +5% per target reduced"
+        },
+        "skill2": {
+            "_name": "Jumbo Pole: Specter (สกิลล่าง - Clone)",
+            "SKILL_DMG": 102.00,
+            "SKILL_HITS": 3,
+            "Ignore_DEF": 40.00,
+            "Bonus_Crit_Rate": 100.00,
+            "Bonus_DMG_HP_Target": 7.00,
+            "Cap_ATK_Percent": 100.00,
+            "_notes": "DMG Boost +10% per target reduced"
+        },
+        "skill1_no_clone": {
+            "_name": "Clone Beatdown (สกิลบน - No Clone)",
+            "SKILL_DMG": 43.00,
+            "SKILL_HITS": 3,
+            "Ignore_DEF": 0.00,
+            "_notes": "Petrify 40%, Damage Resistance 15%, Clone 5 turns"
+        },
+        "skill2_no_clone": {
+            "_name": "Jumbo Pole (สกิลล่าง - No Clone)",
+            "SKILL_DMG": 62.00,
+            "SKILL_HITS": 3,
+            "Ignore_DEF": 0.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายเวท → ATK_BASE = 1500",
+        "*** Clone mechanic: ใช้ Skill 2 (Clone Beatdown) สร้าง Clone 5 turns ***",
+        "*** เมื่อมี Clone สกิลจะเปลี่ยนเป็น Specter version ***",
+        "",
+        "Skill 1 (บน - Clone Beatdown):",
+        "  - No Clone: 43% x3, Petrify 40%, สร้าง Clone",
+        "  - With Clone (Specter): 82% x3, 40% Ignore DEF, 100% Crit Rate (T6)",
+        "",
+        "Skill 2 (ล่าง - Jumbo Pole):",
+        "  - No Clone: 62% x3",
+        "  - With Clone (Specter): 102% x3 + 7% Max HP (cap 100% ATK), 40% Ignore DEF",
+        "",
+        "Passive: Guts, Barrier 155%, ATK-based DEF Boost, HP Heal 55%/95%",
+        "*** ค่าทั้งหมดเป็น Enhanced + T6 แล้ว ***"
+    ]
+}

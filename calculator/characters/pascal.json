@@ -1,0 +1,39 @@
+{
+    "_character": "Pascal",
+    "_rarity": "legend",
+    "_class": "magic",
+    "_source": "https://gamewith.net/sevenknights-rebirth/70569",
+    "_element": "Dark",
+    "// ===== Passive: Divine Authority (ใช้ทั้งสองสกิล) =====": "",
+    "BUFF_ATK": 33.00,
+    "CRIT_DMG": 40.00,
+    "DMG_AMP_BUFF": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill2": {
+            "_name": "Titan of Calamities (สกิลบน)",
+            "SKILL_DMG": 470.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 65.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        },
+        "skill1": {
+            "_name": "Gate to the Abyss (สกิลล่าง)",
+            "SKILL_DMG": 0.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายเวท → ATK_BASE = 1500",
+        "Skill 2 (บน): 470% (Enhanced), 65% Ignore DEF, +50% Crit Rate base (+100% at T6)",
+        "Skill 1 (ล่าง): รีเซ็ต CD ของ Skill 2, ให้ All Damage Nullification 2 hits (Enhanced)",
+        "Passive: +33% ATK Boost (Enhanced), +40% Crit Damage (Always Active)",
+        "Transcend 4: +24% Crit Damage",
+        "*** ค่าทั้งหมดเป็น Enhanced แล้ว ***"
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "_character": "Miho",
+    "_rarity": "legend",
+    "_class": "magic",
+    "_source": "https://gamewith.net/sevenknights-rebirth/70610",
+    "_element": "Dark",
+    "// ===== Passive: Opportunist (ใช้ทั้งสองสกิล) =====": "",
+    "WEAK_DMG": 23.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill2": {
+            "_name": "Overconfident Blow (สกิลบน)",
+            "SKILL_DMG": 185.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        },
+        "skill1": {
+            "_name": "Violent Dance (สกิลล่าง)",
+            "SKILL_DMG": 0.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00,
+            "DMG_AMP_DEBUFF": 22.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายเวท → ATK_BASE = 1500",
+        "Skill 2 (บน): 160% → 185% (Transcend), +85% on Weakness",
+        "Skill 1 (ล่าง): ใส่ debuff Magic Vulnerability +22%",
+        "Passive: Weakness Hit Damage Boost +23%"
+    ]
+}

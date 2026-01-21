@@ -1,0 +1,49 @@
+{
+    "_character": "Espada",
+    "_rarity": "legend",
+    "_class": "magic",
+    "_source": "https://gamewith.net/sevenknights-rebirth/70591",
+    "_element": "Light",
+    "// ===== Passive: Purified Magic (สแต็กได้สูงสุด 4 ครั้ง) =====": "",
+    "DMG_AMP_BUFF": 40.00,
+    "// หมายเหตุ: ค่านี้คือ 10% x 4 stacks = 40% Magic Damage Boost (สูงสุด)": "",
+    "CRIT_DMG": 0.00,
+    "BUFF_ATK": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill1": {
+            "_name": "Goddess's Judgment (สกิลบน)",
+            "SKILL_DMG": 515.00,
+            "SKILL_HITS": 1,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 26.00,
+            "Cap_ATK_Percent": 1300.00,
+            "// หมายเหตุ: ต้องใช้ 4 stacks ของ Purified Magic": "",
+            "// Bonus_DMG_HP_Target: 26% ของ HP เป้าหมาย (T6: 32%)": "",
+            "// Cap_ATK_Percent: จำกัดที่ 1300% ของ ATK (T6: 1600%)": ""
+        },
+        "skill2": {
+            "_name": "Purging Shot (สกิลล่าง)",
+            "SKILL_DMG": 340.00,
+            "SKILL_HITS": 1,
+            "DMG_AMP_DEBUFF": 33.00,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00,
+            "// หมายเหตุ: DMG_AMP_DEBUFF คือ Magic Vulnerability 33%": ""
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายเวท → ATK_BASE = 1500",
+        "Skill 1 (บน): 340% (Enhanced), Magic Vulnerability 33% (5 turns)",
+        "Skill 2 (ล่าง): 515% (Enhanced) + HP-based damage 26% (แคปที่ 1300% ATK)",
+        "  - ต้องใช้ 4 stacks ของ Purified Magic",
+        "  - T6: HP-based เพิ่มเป็น 32%, แคปที่ 1600% ATK",
+        "Passive: ได้ 1 stack เมื่อมีศัตรู 1 ตัวตาย (สูงสุด 4 stacks)",
+        "  - แต่ละ stack: +10% Magic Damage, +10% Crit Rate",
+        "  - 4 stacks รวม: +40% Magic Damage, +40% Crit Rate",
+        "T2: +29% Magic Resistance (Always Active)",
+        "*** ค่าทั้งหมดเป็น Enhanced แล้ว ***"
+    ]
+}

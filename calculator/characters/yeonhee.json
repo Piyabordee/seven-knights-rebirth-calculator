@@ -1,0 +1,36 @@
+{
+    "_character": "Yeonhee",
+    "_rarity": "legend",
+    "_class": "magic",
+    "_source": "https://gamewith.net/sevenknights-rebirth/70497",
+    "_element": "Dark",
+    "// ===== Passive: Otherworldly Insight (ใช้ทั้งสองสกิล) =====": "",
+    "BUFF_ATK": 25.00,
+    "DMG_AMP_BUFF": 0.00,
+    "// ===== Skills =====": "",
+    "_skills": {
+        "skill2": {
+            "_name": "Eternal Slumber (สกิลบน)",
+            "SKILL_DMG": 55.00,
+            "SKILL_HITS": 3,
+            "Ignore_DEF": 40.00,
+            "Bonus_DMG_HP_Target": 0.00,
+            "Cap_ATK_Percent": 0.00
+        },
+        "skill1": {
+            "_name": "Calamitous Gesture (สกิลล่าง)",
+            "SKILL_DMG": 51.00,
+            "SKILL_HITS": 3,
+            "Ignore_DEF": 0.00,
+            "Bonus_DMG_HP_Target": 7.00,
+            "Cap_ATK_Percent": 100.00
+        }
+    },
+    "// ===== Notes =====": "",
+    "_notes": [
+        "Legend สายเวท → ATK_BASE = 1500",
+        "Skill 2 (บน): 55% x3 + 40% Ignore DEF",
+        "Skill 1 (ล่าง): 51% x3 + 7% Max HP (cap 100% ATK)",
+        "Passive: +19% ATK Boost, +35% Magic Damage (3 turns)"
+    ]
+}
