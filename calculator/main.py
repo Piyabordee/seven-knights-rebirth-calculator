@@ -27,7 +27,7 @@ from config_loader import (
     merge_configs,
     get_decimal,
 )
-from menu import select_mode, select_character, select_skill
+from menu import select_mode, select_character, select_skill, select_atk_base
 from display import (
     print_header,
     print_character_info,
@@ -62,17 +62,17 @@ def main():
         buff_atk = get_decimal(user_config, "BUFF_ATK", "0")
         buff_atk_pet = get_decimal(user_config, "BUFF_ATK_PET", "17")
         
-        # Assume ATK_BASE = 1500 (Standard Legend Magic/Attack)
-        atk_base = Decimal("1500")
+        # เลือก ATK_BASE
+        atk_base, atk_base_desc = select_atk_base()
         
-        print("\n--- Input Values (from config.json) ---")
+        print("\n--- Input Values (from config.json & Selection) ---")
         print(f"ATK_CHAR: {atk_char}")
         print(f"ATK_PET: {atk_pet}")
         print(f"Formation: {formation}%")
         print(f"Potential PET: {potential_pet}%")
         print(f"BUFF ATK: {buff_atk}%")
         print(f"BUFF ATK PET: {buff_atk_pet}%")
-        print(f"ATK_BASE (Assumed): {atk_base} (Legend Magic/Attack)")
+        print(f"ATK_BASE: {atk_base} ({atk_base_desc})")
         
         print_calculation_header()
         

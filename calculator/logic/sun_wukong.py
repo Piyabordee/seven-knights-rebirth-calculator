@@ -70,121 +70,186 @@ def calculate_sun_wukong_castle_mode(
     # c * (dmg_crit - dmg_weak) >= HP - n * dmg_weak
     # c >= (HP - n * dmg_weak) / (dmg_crit - dmg_weak)
     
+    # === ดาเมจปกติ (ไม่คริ, ไม่จุดอ่อน) ===
+    # WEAK_DMG = 0 (และไม่บวก base 30%), CRIT_DMG = 100%
+    raw_normal = calculate_raw_dmg(
+        total_atk=total_atk,
+        skill_dmg=skill_dmg,
+        crit_dmg=Decimal("100"),
+        weak_dmg=Decimal("0"),  # ไม่ติดจุดอ่อนเลย
+        dmg_amp_buff=dmg_amp_buff,
+        dmg_amp_debuff=dmg_amp_debuff,
+        dmg_reduction=dmg_reduction,
+        final_dmg_hp=final_dmg_hp
+    )
+    dmg_normal_per_hit = int((raw_normal / eff_def).quantize(Decimal("1"), rounding=ROUND_DOWN))
+    
+    # === หาจำนวนคริขั้นต่ำที่ต้องการ (2 กรณี) ===
     hp = int(hp_target)
     n = skill_hits
-    dmg_weak = dmg_weak_only_per_hit
-    dmg_crit = dmg_crit_weak_per_hit
     
-    # ดาเมจรวมถ้าติดแต่จุดอ่อน (0 crit)
-    total_weak_only = dmg_weak * n
-    
-    # ดาเมจรวมถ้าติดคริทุก hit (ติดจุดอ่อนด้วยทุก hit)
-    total_all_crit = dmg_crit * n
-    
-    # หาจำนวนคริขั้นต่ำ
-    # สมมติ: ทุก hit ติดจุดอ่อน แต่บาง hit ติดคริด้วย
-    # c hit = ติดจุดอ่อน+คริ (dmg_crit)
-    # (n-c) hit = ติดแค่จุดอ่อน (dmg_weak)
-    min_crits_needed = -1  # -1 = ไม่ต้องคริเลย
-    can_kill = False
-    damage_scenarios = []
+    # กรณี 1: Base Weakness (เดิม)
+    # Fail = ติดจุดอ่อน (dmg_weak_only_per_hit)
+    # Success = ติดคริ+จุดอ่อน (dmg_crit_weak_per_hit)
+    min_crits_weak_base = -1
+    can_kill_weak_base = False
+    scenarios_weak_base = []
     
     for c in range(n + 1):
-        weak_only_hits = n - c  # hit ที่ติดแค่จุดอ่อน
-        crit_weak_hits = c      # hit ที่ติดคริ+จุดอ่อน
-        total_dmg = (crit_weak_hits * dmg_crit) + (weak_only_hits * dmg_weak)
+        fail_hits = n - c
+        success_hits = c
+        total_dmg = (success_hits * dmg_crit_weak_per_hit) + (fail_hits * dmg_weak_only_per_hit)
         is_kill = total_dmg >= hp
         
-        damage_scenarios.append({
+        scenarios_weak_base.append({
             "crit_count": c,
-            "weak_count": n,  # ทุก hit ติดจุดอ่อน
+            "fail_hits": fail_hits, # Weak Only
             "total_damage": total_dmg,
             "is_kill": is_kill
         })
         
-        if is_kill and min_crits_needed == -1:
-            min_crits_needed = c
-            can_kill = True
+        if is_kill and min_crits_weak_base == -1:
+            min_crits_weak_base = c
+            can_kill_weak_base = True
+            
+    if not can_kill_weak_base and (n * dmg_crit_weak_per_hit) >= hp:
+        can_kill_weak_base = True
+        min_crits_weak_base = n
+
+    # กรณี 2: Base Normal (ใหม่)
+    # Fail = ไม่ติดอะไรเลย (dmg_normal_per_hit)
+    # Success = ติดคริ+จุดอ่อน (dmg_crit_weak_per_hit) -> สมมติว่าถ้าคริ คือแม่นยำและเข้าจุดอ่อน
+    min_crits_normal_base = -1
+    can_kill_normal_base = False
+    scenarios_normal_base = []
     
-    # ถ้าติดคริทุก hit ก็ยังฆ่าไม่ได้
-    if not can_kill and total_all_crit >= hp:
-        can_kill = True
-        min_crits_needed = n
+    for c in range(n + 1):
+        fail_hits = n - c
+        success_hits = c
+        total_dmg = (success_hits * dmg_crit_weak_per_hit) + (fail_hits * dmg_normal_per_hit)
+        is_kill = total_dmg >= hp
+        
+        scenarios_normal_base.append({
+            "crit_count": c,
+            "fail_hits": fail_hits, # Normal
+            "total_damage": total_dmg,
+            "is_kill": is_kill
+        })
+        
+        if is_kill and min_crits_normal_base == -1:
+            min_crits_normal_base = c
+            can_kill_normal_base = True
+
+    if not can_kill_normal_base and (n * dmg_crit_weak_per_hit) >= hp:
+        can_kill_normal_base = True
+        min_crits_normal_base = n
     
     return {
         "skill_name": skill_name,
         "skill_hits": skill_hits,
         "hp_target": hp,
+        "dmg_normal_per_hit": dmg_normal_per_hit,
         "dmg_weak_only_per_hit": dmg_weak_only_per_hit,
         "dmg_crit_weak_per_hit": dmg_crit_weak_per_hit,
-        "total_weak_only": total_weak_only,
-        "total_all_crit": total_all_crit,
         "total_weakness": total_weakness,
-        "min_crits_needed": min_crits_needed,
-        "can_kill": can_kill,
-        "damage_scenarios": damage_scenarios
+        
+        # Scenario 1: Weakness Base
+        "min_crits_weak_base": min_crits_weak_base,
+        "can_kill_weak_base": can_kill_weak_base,
+        "scenarios_weak_base": scenarios_weak_base,
+        
+        # Scenario 2: Normal Base
+        "min_crits_normal_base": min_crits_normal_base,
+        "can_kill_normal_base": can_kill_normal_base,
+        "scenarios_normal_base": scenarios_normal_base
     }
 
 
 def print_castle_mode_results(results: dict):
-    """แสดงผลลัพธ์ Castle Mode"""
+    """แสดงผลลัพธ์ Castle Mode (2 Scenarios)"""
     
     skill_name = results["skill_name"]
     hits = results["skill_hits"]
     hp = results["hp_target"]
+    dmg_normal = results["dmg_normal_per_hit"]
     dmg_weak = results["dmg_weak_only_per_hit"]
     dmg_crit = results["dmg_crit_weak_per_hit"]
-    total_weak = results["total_weak_only"]
-    total_crit = results["total_all_crit"]
-    min_crits = results["min_crits_needed"]
-    can_kill = results["can_kill"]
     weakness = results["total_weakness"]
     
     print("\n" + "=" * 60)
     print(f"  🐵 Sun Wukong Castle Mode - {skill_name} 🏰")
     print("=" * 60)
     
-    print(f"\n  📊 สกิล: {skill_name}")
-    print(f"  🎯 จำนวน Hits: {hits}")
-    print(f"  ❤️  HP เป้าหมาย: {hp:,}")
-    print(f"  💧 Weakness Bonus: +{weakness}% (30% base + {weakness - 30}%)")
+    print(f"\n  📊 ข้อมูลทั่วไป")
+    print(f"  🎯 Hits: {hits} | ❤️ HP: {hp:,}")
+    print(f"  💧 Weakness: +{weakness}%")
     
-    print("\n" + "-" * 60)
-    print("  📈 ดาเมจต่อ Hit")
-    print("-" * 60)
-    print(f"  ติดจุดอ่อน (ไม่คริ): {dmg_weak:,} / hit")
-    print(f"  ติดคริ + จุดอ่อน:    {dmg_crit:,} / hit")
-    print(f"  ส่วนต่าง:            +{dmg_crit - dmg_weak:,} / hit")
+    print("\n  📈 ดาเมจต่อ Hit")
+    print(f"  1. ⚪ ปกติ (ไม่คริ/ไม่จุดอ่อน):   {dmg_normal:,}")
+    print(f"  2. 🔵 จุดอ่อน (ไม่คริ):         {dmg_weak:,} (+{dmg_weak-dmg_normal:,})")
+    print(f"  3. 🔴 คริ+จุดอ่อน (Max):       {dmg_crit:,} (+{dmg_crit-dmg_weak:,} from Weak)")
     
-    print("\n" + "-" * 60)
-    print("  🎲 ตารางดาเมจตามจำนวนคริ")
-    print("-" * 60)
-    print(f"  {'คริ':>4}  {'จุดอ่อน':>6}  {'ดาเมจรวม':>12}  {'ผลลัพธ์':>10}")
-    print("  " + "-" * 42)
+    # แสดงตารางเปรียบเทียบ
+    print("\n" + "-" * 75)
+    print("  🎲 ตารางเปรียบเทียบคริขั้นต่ำ (Minimum Crits Needed)")
+    print("-" * 75)
+    print(f"  {'คริ':>4} | {'[Case 1] Base=Weakness':^32} | {'[Case 2] Base=Normal':^32}")
+    print(f"       | {'(Fail = 🔵 จุดอ่อน)':^32} | {'(Fail = ⚪ ปกติ)':^32}")
+    print("-" * 75)
     
-    for scenario in results["damage_scenarios"]:
-        c = scenario["crit_count"]
-        w = scenario["weak_count"]
-        d = scenario["total_damage"]
-        is_kill = scenario["is_kill"]
+    scenarios_1 = results["scenarios_weak_base"]
+    scenarios_2 = results["scenarios_normal_base"]
+    min_1 = results["min_crits_weak_base"]
+    min_2 = results["min_crits_normal_base"]
+    kill_1 = results["can_kill_weak_base"]
+    kill_2 = results["can_kill_normal_base"]
+    
+    for i in range(hits + 1):
+        s1 = scenarios_1[i]
+        s2 = scenarios_2[i]
         
-        status = "☠️ ตาย" if is_kill else "❌ รอด"
-        marker = " ⬅️ MIN" if c == min_crits and can_kill else ""
+        # Format S1
+        d1 = s1["total_damage"]
+        mark1 = "✅" if s1["is_kill"] else "❌"
+        note1 = "🔥 MIN" if i == min_1 and kill_1 else ""
+        text1 = f"{d1:,} {mark1} {note1}"
         
-        print(f"  {c:>4}  {w:>6}  {d:>12,}  {status:>10}{marker}")
+        # Format S2
+        d2 = s2["total_damage"]
+        mark2 = "✅" if s2["is_kill"] else "❌"
+        note2 = "🔥 MIN" if i == min_2 and kill_2 else ""
+        text2 = f"{d2:,} {mark2} {note2}"
+        
+        print(f"  {i:>4} | {text1:<32} | {text2:<32}")
+        
+    print("-" * 75)
     
-    print("\n" + "=" * 60)
-    if can_kill:
-        if min_crits == 0:
-            print(f"  ✅ ไม่ต้องคริเลย! แค่ติดจุดอ่อนก็ตาย ({total_weak:,} >= {hp:,})")
+    # สรุป
+    print("\n  📝 สรุปผล (Conclusion)")
+    
+    # Case 1
+    if kill_1:
+        if min_1 == 0:
+            msg1 = "ไม่ต้องคริเลย (แค่ติดจุดอ่อนก็ตาย)"
         else:
-            print(f"  ⚔️  ต้องติดคริขั้นต่ำ: {min_crits} ครั้ง จาก {hits} hits")
-            remaining_weak_only = hits - min_crits
-            min_dmg = (min_crits * dmg_crit) + (remaining_weak_only * dmg_weak)
-            print(f"      = จุดอ่อน {hits} hit (แต่ {min_crits} hit ติดคริด้วย) = {min_dmg:,} ดาเมจ")
+            msg1 = f"ต้องคริ {min_1} ครั้ง"
     else:
-        shortfall = hp - total_crit
-        print(f"  ❌ ติดคริทุก hit ก็ยังฆ่าไม่ได้!")
-        print(f"     ดาเมจสูงสุด: {total_crit:,} / HP: {hp:,}")
-        print(f"     ขาดอีก: {shortfall:,}")
+        msg1 = "คริทุกดอกก็ไม่ตาย (dmg ไม่พอ)"
+        
+    print(f"  🔵 Case 1 (ยืนจุดอ่อน): {msg1}")
+    
+    # Case 2
+    if kill_2:
+        if min_2 == 0:
+            msg2 = "ไม่ต้องคริเลย (ดาเมจปกติพอฆ่าได้)"
+        else:
+            msg2 = f"ต้องคริ {min_2} ครั้ง"
+    else:
+        msg2 = "คริทุกดอกก็ไม่ตาย"
+        
+    print(f"  ⚪ Case 2 (หลุดจุดอ่อน): {msg2}")
+    
+    if kill_1 and kill_2 and min_2 > min_1:
+         print(f"  ⚠️  ถ้าหลุดจุดอ่อน ต้องคริเพิ่มอีก {min_2 - min_1} ครั้ง")
+         
     print("=" * 60)

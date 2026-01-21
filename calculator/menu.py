@@ -3,6 +3,7 @@ Menu - UI/Menu selection functions
 """
 
 from config_loader import list_characters, load_character_full, load_monster_preset
+from decimal import Decimal
 
 
 def select_mode() -> tuple:
@@ -132,3 +133,51 @@ def select_skill(meta: dict) -> tuple:
     skill_config = {k: v for k, v in skill_config.items() if not k.startswith("_")}
     print(f">>> สกิล: {skills[selected_key].get('_name', selected_key)}")
     return skill_config, False, None
+
+
+def select_atk_base() -> tuple:
+    """
+    ให้ผู้ใช้เลือกค่า ATK_BASE
+    Returns: (atk_base_value, description)
+    """
+    from constants import ATK_BASE
+    
+    print("\n--- เลือกค่าพลังโจมตีพื้นฐาน (Select Base ATK) ---")
+    
+    options = []
+    
+    # Legend
+    for char_class, value in ATK_BASE["legend"].items():
+        desc = f"Legend {char_class.capitalize()}: {value}"
+        options.append((value, desc))
+        
+    # Rare
+    for char_class, value in ATK_BASE["rare"].items():
+        desc = f"Rare {char_class.capitalize()}: {value}"
+        options.append((value, desc))
+        
+    # Custom
+    options.append((None, "กำหนดเอง (Custom)"))
+        
+    for i, (_, desc) in enumerate(options, 1):
+        print(f"  {i}. {desc}")
+        
+    choice = input(f"\nเลือก [1-{len(options)}]: ").strip()
+    
+    try:
+        idx = int(choice) - 1
+        if 0 <= idx < len(options):
+            value, desc = options[idx]
+            
+            if value is None:
+                # Custom input
+                custom_val = input("ระบุค่า ATK_BASE: ").strip()
+                return Decimal(custom_val), f"Custom ({custom_val})"
+            
+            return value, desc
+    except (ValueError, IndexError):
+        pass
+        
+    # Default
+    print(">>> Invalid selection, using default (Legend Magic: 1500)")
+    return Decimal("1500"), "Legend Magic (Default)"
