@@ -2,11 +2,14 @@
 Menu - UI/Menu selection functions
 """
 
+from __future__ import annotations
+
+from typing import Any
 from config_loader import list_characters, load_character_full, load_monster_preset
 from decimal import Decimal
 
 
-def select_mode() -> tuple:
+def select_mode() -> tuple[str, dict[str, Any]]:
     """ให้ผู้ใช้เลือกโหมด (ปกติ / ตีปราสาท)"""
     print("\n--- เลือกโหมด (Select Mode) ---")
     print("  1. ปกติ (ใช้ค่าจาก config.json)")
@@ -39,7 +42,7 @@ def select_mode() -> tuple:
         return "normal", {}
 
 
-def select_character() -> tuple:
+def select_character() -> tuple[str | None, dict[str, Any], dict[str, Any]]:
     """ให้ผู้ใช้เลือกตัวละคร"""
     characters = list_characters()
     
@@ -72,7 +75,7 @@ def select_character() -> tuple:
     return None, {}, {}
 
 
-def select_skill(meta: dict) -> tuple:
+def select_skill(meta: dict[str, Any]) -> tuple[dict[str, Any], bool, list[dict[str, Any]] | None]:
     """
     ให้ผู้ใช้เลือกสกิล (ถ้ามีหลายสกิล)
     Returns: (skill_config, is_both_skills, all_skills_data)
@@ -135,7 +138,7 @@ def select_skill(meta: dict) -> tuple:
     return skill_config, False, None
 
 
-def select_atk_base() -> tuple:
+def select_atk_base() -> tuple[Decimal, str]:
     """
     ให้ผู้ใช้เลือกค่า ATK_BASE
     Returns: (atk_base_value, description)

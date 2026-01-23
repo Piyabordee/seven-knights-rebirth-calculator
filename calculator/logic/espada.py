@@ -3,7 +3,10 @@ Espada Special Logic
 เนื่องจาก Espada มี HP-based damage ที่ต้องคำนวณแยกและเปรียบเทียบ
 """
 
+from __future__ import annotations
+
 from decimal import Decimal
+from typing import Any
 import sys
 from pathlib import Path
 
@@ -22,10 +25,10 @@ from damage_calc import (
 
 
 def calculate_espada_damage(
-    total_atk, skill_dmg, crit_dmg, weak_dmg,
-    dmg_amp_buff, dmg_amp_debuff, dmg_reduction,
-    effective_def, hp_target, bonus_dmg_hp, cap_atk_percent
-):
+    total_atk: Decimal, skill_dmg: Decimal, crit_dmg: Decimal, weak_dmg: Decimal,
+    dmg_amp_buff: Decimal, dmg_amp_debuff: Decimal, dmg_reduction: Decimal,
+    effective_def: Decimal, hp_target: Decimal, bonus_dmg_hp: Decimal, cap_atk_percent: Decimal
+) -> dict[str, Any]:
     """
     คำนวณดาเมจของ Espada แบบพิเศษ
     - คำนวณ 2 กรณี: (1) ดาเมจปกติ (2) ดาเมจ HP-based

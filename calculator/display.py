@@ -2,7 +2,10 @@
 Display - ฟังก์ชันแสดงผลทั้งหมด
 """
 
+from __future__ import annotations
+
 from decimal import Decimal
+from typing import Any
 from damage_calc import (
     calculate_total_atk,
     calculate_dmg_hp,
@@ -15,14 +18,14 @@ from damage_calc import (
 from config_loader import merge_configs
 
 
-def print_header():
+def print_header() -> None:
     """แสดง header ของโปรแกรม"""
     print("=" * 60)
     print("  7k Rebirth - Damage Calculator")
     print("=" * 60)
 
 
-def print_character_info(char_name: str, rarity: str, char_class: str, atk_base: int):
+def print_character_info(char_name: str, rarity: str, char_class: str, atk_base: int | Decimal) -> None:
     """แสดงข้อมูลตัวละคร"""
     if char_name:
         print(f"\n>>> ตัวละคร: {char_name.capitalize()} ({rarity} {char_class})")
@@ -42,12 +45,12 @@ def print_weapon_set(weapon_set: int):
 
 
 def print_input_values(
-    atk_char, atk_pet, formation, potential_pet,
-    buff_atk, buff_atk_pet, skill_dmg, skill_hits,
-    crit_dmg, weak_dmg, dmg_amp_buff, dmg_amp_debuff,
-    def_target, def_reduce, ignore_def,
-    char_config, user_config
-):
+    atk_char: Decimal, atk_pet: Decimal, formation: Decimal, potential_pet: Decimal,
+    buff_atk: Decimal, buff_atk_pet: Decimal, skill_dmg: Decimal, skill_hits: int,
+    crit_dmg: Decimal, weak_dmg: Decimal, dmg_amp_buff: Decimal, dmg_amp_debuff: Decimal,
+    def_target: Decimal, def_reduce: Decimal, ignore_def: Decimal,
+    char_config: dict[str, Any], user_config: dict[str, Any]
+) -> None:
     """แสดงค่า Input (Character + User)"""
     print("\n--- Input Values (Character + User) ---")
     print(f"ATK_CHAR: {atk_char:,.0f}  |  ATK_PET: {atk_pet:,.0f}")
@@ -93,19 +96,19 @@ def print_input_values(
     print(f"Ignore_DEF: {ignore_def}%")
 
 
-def print_calculation_header():
+def print_calculation_header() -> None:
     """แสดง header ผลการคำนวณ"""
     print("\n" + "=" * 60)
     print("  ผลการคำนวณ (Calculation Results)")
     print("=" * 60)
 
 
-def print_total_atk(total_atk):
+def print_total_atk(total_atk: Decimal) -> None:
     """แสดง Total ATK"""
     print(f"\n1. Total_ATK = {total_atk:,.2f}")
 
 
-def print_hp_based_damage(dmg_hp, cap_atk, final_dmg_hp):
+def print_hp_based_damage(dmg_hp: Decimal, cap_atk: Decimal, final_dmg_hp: Decimal) -> None:
     """แสดง HP-Based Damage"""
     if dmg_hp > 0:
         print(f"2. DMG_HP = {dmg_hp:,.2f}")
@@ -115,18 +118,18 @@ def print_hp_based_damage(dmg_hp, cap_atk, final_dmg_hp):
         print(f"2. HP-Based Damage = 0 (ไม่ใช้)")
 
 
-def print_raw_damage(raw_dmg_crit, raw_dmg_crit_weakness):
+def print_raw_damage(raw_dmg_crit: Decimal, raw_dmg_crit_weakness: Decimal) -> None:
     """แสดง RAW Damage"""
     print(f"\n3. RAW_DMG (คริ) = {raw_dmg_crit:,.2f}")
     print(f"   RAW_DMG (คริ+จุดอ่อน) = {raw_dmg_crit_weakness:,.2f}")
 
 
-def print_effective_def(effective_def):
+def print_effective_def(effective_def: Decimal) -> None:
     """แสดง Effective DEF"""
     print(f"4. Effective_DEF = {effective_def:.2f}")
 
 
-def calc_atk_needed(current_dmg, monster_hp, current_atk):
+def calc_atk_needed(current_dmg: int, monster_hp: int, current_atk: Decimal) -> int:
     """คำนวณว่าต้องเพิ่ม ATK_CHAR อีกเท่าไหร่ถึงจะฆ่ามอนได้"""
     if current_dmg <= 0 or monster_hp <= 0:
         return 0
@@ -137,7 +140,7 @@ def calc_atk_needed(current_dmg, monster_hp, current_atk):
     return int(atk_needed) + 1  # ปัดขึ้น
 
 
-def get_hp_status(damage, monster_hp, current_atk):
+def get_hp_status(damage: int, monster_hp: int, current_atk: Decimal) -> str:
     """สร้างข้อความเลือดมอน"""
     if monster_hp <= 0:
         return ""  # ไม่ใช่โหมดปราสาท
@@ -149,11 +152,11 @@ def get_hp_status(damage, monster_hp, current_atk):
 
 
 def print_final_damage_results(
-    skill_hits, weak_dmg,
-    final_dmg_crit, final_dmg_crit_weakness,
-    final_dmg_no_crit, final_dmg_weakness_only,
-    monster_hp, atk_char
-):
+    skill_hits: int, weak_dmg: Decimal,
+    final_dmg_crit: int, final_dmg_crit_weakness: int,
+    final_dmg_no_crit: int, final_dmg_weakness_only: int,
+    monster_hp: int, atk_char: Decimal
+) -> None:
     """แสดงผล Final Damage Results"""
     print("\n" + "-" * 40)
     print("  Final Damage Results")
@@ -182,7 +185,7 @@ def print_final_damage_results(
     print("-" * 40)
 
 
-def print_espada_results(espada_result, weak_dmg, final_dmg_hp):
+def print_espada_results(espada_result: dict[str, Any], weak_dmg: Decimal, final_dmg_hp: Decimal) -> None:
     """แสดงผล Espada แบบพิเศษ"""
     print("\n" + "=" * 60)
     print("  Espada Special Calculation (4 กรณี)")
@@ -211,11 +214,11 @@ def print_espada_results(espada_result, weak_dmg, final_dmg_hp):
 
 
 def print_both_skills_results(
-    all_skills_data, char_config, user_config, 
-    total_atk, crit_dmg, weak_dmg, 
-    dmg_amp_buff, dmg_amp_debuff, dmg_reduction,
-    def_target, def_buff, def_reduce, hp_target
-):
+    all_skills_data: list[dict[str, Any]], char_config: dict[str, Any], user_config: dict[str, Any], 
+    total_atk: Decimal, crit_dmg: Decimal, weak_dmg: Decimal, 
+    dmg_amp_buff: Decimal, dmg_amp_debuff: Decimal, dmg_reduction: Decimal,
+    def_target: Decimal, def_buff: Decimal, def_reduce: Decimal, hp_target: Decimal
+) -> None:
     """แสดงผลรวมทั้งสองสกิล"""
     print("\n" + "=" * 60)
     print("  📊 รวมทั้งสองสกิล (Both Skills)")

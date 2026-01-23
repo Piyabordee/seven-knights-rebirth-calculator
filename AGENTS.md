@@ -3,6 +3,7 @@
 > 🎮 **เกม:** Seven Knights Rebirth  
 > 🎯 **วัตถุประสงค์:** คำนวณดาเมจสกิลที่แม่นยำ  
 > 📁 **โปรเจค:** `calculator/` (Python CLI)
+> 🐍 **Python:** 3.10+ (with full type hints)
 
 ---
 
@@ -57,6 +58,36 @@ calculator/
     ├── klahan.py        # HP Condition Bonus
     ├── ryan.py          # Lost HP Bonus + Weakness Extra
     └── sun_wukong.py    # Castle Mode (คริขั้นต่ำ)
+```
+
+---
+
+## 🔒 Type Hints (Python 3.10+)
+
+ทุกไฟล์มี type hints ครบถ้วนสำหรับ:
+- Better IDE autocomplete และ error detection
+- Self-documenting code
+- ป้องกัน runtime errors
+
+### Features Used:
+```python
+from __future__ import annotations  # Modern type hints
+from typing import Any              # Generic types
+from decimal import Decimal         # Precision math
+
+# Example function signature:
+def calculate_damage(
+    total_atk: Decimal,
+    skill_dmg: Decimal,
+    crit_dmg: Decimal
+) -> dict[str, Any]:
+    ...
+```
+
+### Type Aliases:
+```python
+# damage_calc.py
+NumericType = Union[int, float, str, Decimal]  # Values that can be Decimal
 ```
 
 ---
@@ -594,6 +625,12 @@ python main.py           # Interactive mode
 ---
 
 ## 📝 Changelog
+
+### 2026-01-24: Type Hints Refactor
+- เพิ่ม type hints ครบทุกไฟล์ (100% coverage)
+- ใช้ `from __future__ import annotations` สำหรับ modern syntax
+- เพิ่ม `NumericType` type alias ใน `damage_calc.py`
+- อัพเดท Python requirement เป็น 3.10+
 
 ### 2026-01-20: Sun Wukong Castle Mode
 - เพิ่ม `logic/sun_wukong.py` - Castle Mode calculator

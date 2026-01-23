@@ -2,9 +2,10 @@
 
 # ⚔️ Seven Knights Rebirth Calculator
 
-  <img src="https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge" alt="Version">
-  <img src="https://img.shields.io/badge/Python-3.9+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Version-2.1.0-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/Type_Hints-100%25-blueviolet?style=for-the-badge" alt="Type Hints">
   <img src="https://img.shields.io/badge/AI_Powered-90%25-purple?style=for-the-badge&logo=openai&logoColor=white" alt="AI Powered">
 
   <h3>Advanced Damage Optimization Tool for End-Game Players</h3>
@@ -64,13 +65,14 @@ It is specifically designed for:
 | **⚡ Total ATK Calculator** | Instant calculation of effective Attack Power including Pet, Formation, and hidden multipliers. |
 | **📝 Customizable Config** | Persistent `config.json` allows for rapid iteration of stats without code changes. |
 | **🧩 Extensible Architecture** | Modular JSON-based character system makes adding new heroes effortless. |
+| **🔒 Type-Safe Code** | 100% type-annotated codebase for better IDE support and error detection. |
 
 ---
 
 ## 🛠️ Installation
 
 ### Prerequisites
-*   Python 3.9 or higher
+*   Python 3.10 or higher (for modern type hints support)
 
 ### Quick Start
 

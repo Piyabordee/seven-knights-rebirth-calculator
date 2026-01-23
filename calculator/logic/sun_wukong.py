@@ -4,7 +4,10 @@ Sun Wukong Special Logic - Castle Mode Calculator
 - สมมติ: hit ที่ไม่ติดคริ จะติดจุดอ่อนเสมอ
 """
 
+from __future__ import annotations
+
 from decimal import Decimal, ROUND_DOWN
+from typing import Any
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -25,7 +28,7 @@ def calculate_sun_wukong_castle_mode(
     hp_target: Decimal,
     skill_name: str,
     final_dmg_hp: Decimal = Decimal("0")
-) -> dict:
+) -> dict[str, Any]:
     """
     คำนวณดาเมจ Sun Wukong แบบ Castle Mode:
     - คำนวณดาเมจต่อ hit แบบติดจุดอ่อนเท่านั้น (no crit)
@@ -165,7 +168,7 @@ def calculate_sun_wukong_castle_mode(
     }
 
 
-def print_castle_mode_results(results: dict):
+def print_castle_mode_results(results: dict[str, Any]) -> None:
     """แสดงผลลัพธ์ Castle Mode (2 Scenarios)"""
     
     skill_name = results["skill_name"]

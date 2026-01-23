@@ -68,8 +68,13 @@ HP_BASE = {
 def get_atk_base(rarity: str, char_class: str) -> Decimal:
     """
     ดึงค่า ATK_BASE ตาม Rarity และ Class
-    rarity: "legend" หรือ "rare"
-    char_class: "attack", "magic", "support", "defense", "balance"
+    
+    Args:
+        rarity: "legend" หรือ "rare"
+        char_class: "attack", "magic", "support", "defense", "balance"
+    
+    Returns:
+        ATK_BASE value as Decimal
     """
     rarity = rarity.lower()
     char_class = char_class.lower()
@@ -84,8 +89,13 @@ def get_atk_base(rarity: str, char_class: str) -> Decimal:
 def get_def_base(rarity: str, char_class: str) -> Decimal:
     """
     ดึงค่า DEF_BASE ตาม Rarity และ Class
-    rarity: "legend" หรือ "rare"
-    char_class: "attack", "magic", "support", "defense", "balance"
+    
+    Args:
+        rarity: "legend" หรือ "rare"
+        char_class: "attack", "magic", "support", "defense", "balance"
+    
+    Returns:
+        DEF_BASE value as Decimal
     """
     rarity = rarity.lower()
     char_class = char_class.lower()
@@ -100,8 +110,13 @@ def get_def_base(rarity: str, char_class: str) -> Decimal:
 def get_hp_base(rarity: str, char_class: str) -> Decimal:
     """
     ดึงค่า HP_BASE ตาม Rarity และ Class
-    rarity: "legend" หรือ "rare"
-    char_class: "attack", "magic", "support", "defense", "balance"
+    
+    Args:
+        rarity: "legend" หรือ "rare"
+        char_class: "attack", "magic", "support", "defense", "balance"
+    
+    Returns:
+        HP_BASE value as Decimal
     """
     rarity = rarity.lower()
     char_class = char_class.lower()

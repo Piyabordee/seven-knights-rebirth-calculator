@@ -2,12 +2,15 @@
 Config Loader - โหลดและจัดการ config files
 """
 
+from __future__ import annotations
+
 import json
 from pathlib import Path
 from decimal import Decimal
+from typing import Any
 
 
-def list_characters() -> list:
+def list_characters() -> list[str]:
     """แสดงรายชื่อตัวละครที่มี config"""
     chars_dir = Path(__file__).parent / "characters"
     if not chars_dir.exists():
@@ -15,7 +18,7 @@ def list_characters() -> list:
     return [f.stem for f in chars_dir.glob("*.json")]
 
 
-def load_json(path: Path) -> dict:
+def load_json(path: Path) -> dict[str, Any]:
     """โหลด JSON และกรองค่า comment/metadata ออก"""
     if path.exists():
         with open(path, 'r', encoding='utf-8') as f:
@@ -25,7 +28,7 @@ def load_json(path: Path) -> dict:
     return {}
 
 
-def load_character_full(name: str) -> tuple:
+def load_character_full(name: str) -> tuple[dict[str, Any], dict[str, Any]]:
     """โหลด config จาก characters/[name].json รวม metadata"""
     char_path = Path(__file__).parent / "characters" / f"{name}.json"
     if char_path.exists():
@@ -39,13 +42,13 @@ def load_character_full(name: str) -> tuple:
     return {}, {}
 
 
-def load_user_config() -> dict:
+def load_user_config() -> dict[str, Any]:
     """โหลด config จาก config.json"""
     config_path = Path(__file__).parent / "config.json"
     return load_json(config_path)
 
 
-def load_monster_preset(filename: str) -> dict:
+def load_monster_preset(filename: str) -> dict[str, Any]:
     """โหลด monster preset จากไฟล์"""
     monster_dir = Path(__file__).parent / "characters" / "monster"
     monster_path = monster_dir / filename
@@ -58,7 +61,7 @@ def load_monster_preset(filename: str) -> dict:
     return {}
 
 
-def apply_weapon_set(config: dict) -> dict:
+def apply_weapon_set(config: dict[str, Any]) -> dict[str, Any]:
     """
     ใช้ชุดเซ็ทอาวุธตาม Weapon_Set
     0 = ไม่ใส่, 1 = จุดอ่อน(+35 WEAK), 2 = คริ(+15 IgnoreDEF), 
@@ -82,7 +85,7 @@ def apply_weapon_set(config: dict) -> dict:
     return config
 
 
-def merge_configs(char_config: dict, user_config: dict) -> dict:
+def merge_configs(char_config: dict[str, Any], user_config: dict[str, Any]) -> dict[str, Any]:
     """
     รวม config โดย ADD ค่าที่เป็น % เข้าด้วยกัน
     - character: ค่าตายตัวจากตัวละคร
@@ -98,7 +101,7 @@ def merge_configs(char_config: dict, user_config: dict) -> dict:
     ]
     
     # ค่าที่ต้อง mapping ไปใส่ key อื่น (เช่น Bonus_Crit_DMG -> CRIT_DMG)
-    mapping_keys = {
+    mapping_keys: dict[str, str] = {
         "Bonus_Crit_DMG": "CRIT_DMG"
     }
     
@@ -119,6 +122,6 @@ def merge_configs(char_config: dict, user_config: dict) -> dict:
     return merged
 
 
-def get_decimal(config: dict, key: str, default: str = "0") -> Decimal:
+def get_decimal(config: dict[str, Any], key: str, default: str = "0") -> Decimal:
     """ดึงค่าจาก config เป็น Decimal"""
     return Decimal(str(config.get(key, default)))
