@@ -137,6 +137,7 @@ See detailed output examples for all characters: **[📄 SHOWCASES.md](docs/SHOW
 | Character | _class | Special Mechanics |
 |:----------|:-------|:------------------|
 | Sun Wukong | Balance | Castle Mode (คริขั้นต่ำ) |
+| Biscuit | Support | Dual Scaling (ATK+DEF) |
 | Espada | Magic | HP-Based Damage |
 | Freyja | Magic | HP Alteration |
 | Ryan | Attack | Lost HP Bonus |
