@@ -118,19 +118,25 @@ Detailed output examples from the 7k Rebirth Damage Calculator.
 
 ```text
 ==================================================
-  Biscuit Calculation Results
+Biscuit Calculation Results
 ==================================================
-Total DEF (Classic): 1,929 (Char + Pet + Base Support Bonus)
-*Note: Pet Potential (DEF %) is NOT included*
+Total DEF (Classic): 1,929
 ----------------------------------------
-Type       | ATK Part     | DEF Part     | Total       
+Type       | ATK Part     | DEF Part     | Total
 ----------------------------------------
-Normal     | 1,947        | 1,118        | 3,065       
-CRIT       | 4,206        | 2,416        | 6,622 🔥 MATCH
+Normal     | 3,139        | 1,803        | 4,942
+CRIT       | 5,650        | 3,246        | 8,896
 ----------------------------------------
-Total Skill Damage (Normal) 1 hits: 3,065
-Total Skill Damage (CRIT)   1 hits: 6,622
+Total Skill Damage (Normal) 1 hits: 4,942
+Total Skill Damage (CRIT)   1 hits: 8,896
 ==================================================
+
+------------------------------------------------------------
+  🐉 HP มอนสเตอร์: 8,650
+------------------------------------------------------------
+  💀 [คริ] มอนตาย! (เกิน 246)
+  ❌ [ธรรมดา] มอนไม่ตาย ขาด 42.9% (3,708)
+------------------------------------------------------------
 ```
 
 ---
