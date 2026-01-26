@@ -305,6 +305,36 @@ final_hp = min(dmg_hp, cap) if cap > 0 else dmg_hp
 
 ---
 
+### Dual Scaling (Biscuit) - `logic/biscuit.py`
+> Damage combines separate ATK and DEF calculations
+
+```python
+# 1. Total DEF Calculation (Strict Formula)
+# Note: Pet Potential (DEF %) and BUFF_ATK_PET are NOT calculated
+# Only Flat Pet Defense (Input) is used
+# 10.5 is fixed Formation Bonus for this specific calculation
+Total_DEF = DEF_CHAR + DEF_PET + (Base_DEF_Support * 10.5 / 100)
+
+# 2. Dual Calculations
+# Calculate Raw Damage using Total_ATK (Normal formula)
+# Calculate Raw Damage using Total_DEF (as Base)
+# Final Damage = Final_ATK_Part + Final_DEF_Part
+```
+
+| Field | Value | Note |
+|-------|-------|------|
+| `DEF_CHAR` | Input | Character Defense |
+| `DEF_PET` | Input | Pet Defense (Flat only) |
+| `SKILL_DMG_DEF` | 135.00 | Skill scaling from DEF |
+
+**Note:** The system does **NOT** apply `Potential_PET` to the Defense calculation.
+
+**Functions:**
+- `calculate_biscuit_damage()` - Calculate split damage
+- `print_biscuit_results()` - Display ATK/DEF parts separately
+
+---
+
 ### Castle Mode (Sun Wukong) - `logic/sun_wukong.py`
 > Calculate minimum crits needed to kill monster
 
@@ -566,6 +596,7 @@ sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
 
 | Character | Element | Class | Special Mechanics | Logic File |
 |-----------|---------|-------|-------------------|------------|
+| Biscuit | Dark | Support | Dual Scaling (ATK+DEF) | `logic/biscuit.py` |
 | Espada | Fire | Magic | HP-Based + Multi-scenario | `logic/espada.py` |
 | Freyja | Light | Magic | HP Alteration | `logic/freyja.py` |
 | Klahan | Wind | Attack | HP Condition Bonus | `logic/klahan.py` |

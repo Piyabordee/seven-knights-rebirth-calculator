@@ -112,4 +112,27 @@ Detailed output examples from the 7k Rebirth Damage Calculator.
 
 ---
 
+## 🛡️ Biscuit - Dual Scaling (ATK + DEF)
+
+*Calculates damage correctly using separate ATK and DEF components.*
+
+```text
+==================================================
+  Biscuit Calculation Results
+==================================================
+Total DEF (Classic): 1,929 (Char + Pet + Base Support Bonus)
+*Note: Pet Potential (DEF %) is NOT included*
+----------------------------------------
+Type       | ATK Part     | DEF Part     | Total       
+----------------------------------------
+Normal     | 1,947        | 1,118        | 3,065       
+CRIT       | 4,206        | 2,416        | 6,622 🔥 MATCH
+----------------------------------------
+Total Skill Damage (Normal) 1 hits: 3,065
+Total Skill Damage (CRIT)   1 hits: 6,622
+==================================================
+```
+
+---
+
 [← Back to README](../README.md)
