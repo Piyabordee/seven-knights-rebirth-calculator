@@ -157,23 +157,29 @@ Modify `calculator/config.json` to match your in-game stats. See [config.json](c
 
 ---
 
+## 📚 Documentation
+
+For detailed character creation instructions, see **[GAMEWITH_GUIDE.md](GAMEWITH_GUIDE.md)**
+
+---
+
 <details>
 <summary><b>📂 Project Structure</b> (click to expand)</summary>
 
 ```bash
 calculator/
 ├── main.py                  # Entry Point
-├── character_registry.py    # NEW: Registry Pattern for characters
+├── character_registry.py    # Registry Pattern for characters
 ├── menu.py                  # CLI Interface
 ├── atk_compare_mode.py      # ATK Comparison Logic
 ├── damage_calc.py           # Core Math Engine
 ├── config.json              # User Settings
 ├── test_all_characters.py   # Integration Tests
 ├── characters/              # Hero Database (JSON)
-│   ├── biscuit.json         # NEW: Dual Scaling hero
+│   ├── biscuit.json         # Dual Scaling hero
 │   └── ...
 └── logic/                   # Specialized Algorithms
-    ├── biscuit.py           # NEW: ATK+DEF calculations
+    ├── biscuit.py           # ATK+DEF calculations
     └── ...
 ```
 
