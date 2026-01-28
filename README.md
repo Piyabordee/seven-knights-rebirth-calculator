@@ -2,16 +2,16 @@
 
 # ⚔️ Seven Knights Rebirth Calculator
 
-  <img src="https://img.shields.io/badge/Version-2.1.0-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.2.0-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/Type_Hints-100%25-blueviolet?style=for-the-badge" alt="Type Hints">
   <img src="https://img.shields.io/badge/AI_Powered-90%25-purple?style=for-the-badge&logo=openai&logoColor=white" alt="AI Powered">
 
   <h3>Advanced Damage Optimization Tool for End-Game Players</h3>
-  
+
   <p>
-    Reverse-engineered damage formulas • Castle Rush Simulator • Precision CLI
+    Reverse-engineered damage formulas • Castle Rush Simulator • Precision CLI • Registry Pattern
   </p>
 
 </div>
@@ -63,8 +63,9 @@ It is specifically designed for:
 | **🏰 Castle Mode Simulator** | Exclusive **Sun Wukong** algorithms to calculate the *exact* minimum critical hits needed to clear stages. |
 | **📊 Multi-Scenario Analysis** | Automatically simulates "Best Case" (Crit + Weakness) vs. "Worst Case" (Normal) scenarios side-by-side. |
 | **⚡ Total ATK Calculator** | Instant calculation of effective Attack Power including Pet, Formation, and hidden multipliers. |
+| **🛡️ Dual Scaling Support** | **NEW:** Biscuit's unique ATK + DEF damage calculation. |
 | **📝 Customizable Config** | Persistent `config.json` allows for rapid iteration of stats without code changes. |
-| **🧩 Extensible Architecture** | Modular JSON-based character system makes adding new heroes effortless. |
+| **🧩 Extensible Architecture** | **NEW:** Registry Pattern - add characters without modifying core code. |
 | **🔒 Type-Safe Code** | 100% type-annotated codebase for better IDE support and error detection. |
 
 ---
@@ -136,8 +137,8 @@ See detailed output examples for all characters: **[📄 SHOWCASES.md](docs/SHOW
 
 | Character | _class | Special Mechanics |
 |:----------|:-------|:------------------|
+| **Biscuit** (NEW!) | Support | Dual Scaling (ATK+DEF) |
 | Sun Wukong | Balance | Castle Mode (คริขั้นต่ำ) |
-| Biscuit | Support | Dual Scaling (ATK+DEF) |
 | Espada | Magic | HP-Based Damage |
 | Freyja | Magic | HP Alteration |
 | Ryan | Attack | Lost HP Bonus |
@@ -161,14 +162,25 @@ Modify `calculator/config.json` to match your in-game stats. See [config.json](c
 
 ```bash
 calculator/
-├── main.py              # Entry Point
-├── menu.py              # CLI Interface
-├── atk_compare_mode.py  # ATK Comparison Logic
-├── damage_calc.py       # Core Math Engine
-├── config.json          # User Settings
-├── characters/          # Hero Database (JSON)
-└── logic/               # Specialized Algorithms
+├── main.py                  # Entry Point
+├── character_registry.py    # NEW: Registry Pattern for characters
+├── menu.py                  # CLI Interface
+├── atk_compare_mode.py      # ATK Comparison Logic
+├── damage_calc.py           # Core Math Engine
+├── config.json              # User Settings
+├── test_all_characters.py   # Integration Tests
+├── characters/              # Hero Database (JSON)
+│   ├── biscuit.json         # NEW: Dual Scaling hero
+│   └── ...
+└── logic/                   # Specialized Algorithms
+    ├── biscuit.py           # NEW: ATK+DEF calculations
+    └── ...
 ```
+
+**Architecture Highlights:**
+- 🔌 **Registry Pattern** - Characters self-register logic
+- ✨ **Modern Python** - Type hints, Decimal precision
+- 🧪 **Tested** - Integration test suite included
 
 </details>
 

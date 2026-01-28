@@ -26,25 +26,29 @@ python main.py
 
 ---
 
-## 📁 File Structure (Refactored)
+## 📁 File Structure (Modern Architecture)
 
 ```
 7k-project/
-├── AGENTS.md            # This file - AI Agent guide
-├── README.md            # User-facing documentation
-├── GAMEWITH_GUIDE.md    # Guide for scraping GameWith data
+├── AGENTS.md               # This file - AI Agent guide
+├── README.md               # User-facing documentation
+├── GAMEWITH_GUIDE.md       # Guide for scraping GameWith data
+├── pyproject.toml          # Modern Python project configuration
 ├── docs/
-│   └── SHOWCASES.md     # Character output examples
+│   └── SHOWCASES.md        # Character output examples
 └── calculator/
     ├── main.py              # Entry Point - orchestrates all modules
+    ├── character_registry.py# Registry pattern for character handlers
     ├── config_loader.py     # Load and merge config files
     ├── menu.py              # UI/Menu selection (mode, character, skill)
     ├── atk_compare_mode.py  # ATK Comparison Mode logic
     ├── display.py           # All display/output functions
     ├── damage_calc.py       # Core calculation formulas
-    ├── constants.py         # Constants (DEF_MODIFIER, ATK_BASE)
+    ├── constants.py         # Constants (DEF_MODIFIER, ATK_BASE, etc.)
     ├── config.json          # User settings
+    ├── test_all_characters.py# Integration test suite
     ├── characters/          # Character files
+    │   ├── biscuit.json     # NEW: Dual Scaling (ATK + DEF)
     │   ├── espada.json
     │   ├── freyja.json
     │   ├── klahan.json
@@ -60,6 +64,7 @@ python main.py
     │       ├── castle_room2.json  # DEF=784, HP=10,790
     │       └── normal.json
     └── logic/               # Special logic (complex characters)
+        ├── biscuit.py       # NEW: Dual Scaling ATK + DEF
         ├── espada.py        # HP-Based + Multi-scenario
         ├── freyja.py        # HP Alteration
         ├── klahan.py        # HP Condition Bonus
@@ -102,9 +107,32 @@ NumericType = Union[int, float, str, Decimal]  # Values that can be Decimal
 ## 🧩 Module Responsibilities
 
 ### `main.py` - Entry Point
-- Orchestrates all modules
+- Orchestrates all modules using **Registry Pattern**
 - Flow sequence: mode → character → skill → calculate → display
-- Checks if special logic is needed
+- Uses `character_registry` to find character-specific handlers dynamically
+- No more if/elif chains - characters self-register their logic
+
+### `character_registry.py` - Character Registry
+> **NEW:** Registry pattern for extensible character handling
+
+| Function | Description |
+|----------|-------------|
+| `register_character(name)` | Decorator to register character handler |
+| `get_character_handler(name)` | Retrieve handler for character |
+| `list_registered_characters()` | List all characters with handlers |
+
+**Usage:**
+```python
+@register_character("freyja")
+def handle_freyja(...):
+    # Character logic here
+    return True  # Handled
+```
+
+**Benefits:**
+- Add new characters without modifying `main.py`
+- Each character owns its logic
+- Testable and maintainable
 
 ### `config_loader.py` - Config Management
 | Function | Description |
@@ -305,8 +333,8 @@ final_hp = min(dmg_hp, cap) if cap > 0 else dmg_hp
 
 ---
 
-### Dual Scaling (Biscuit) - `logic/biscuit.py`
-> Damage combines separate ATK and DEF calculations
+### Dual Scaling (Biscuit) - `logic/biscuit.py` & `character_registry.py`
+> **NEW:** Damage combines separate ATK and DEF calculations
 
 ```python
 # 1. Total DEF Calculation (Strict Formula)
@@ -328,6 +356,11 @@ Total_DEF = DEF_CHAR + DEF_PET + (Base_DEF_Support * 10.5 / 100)
 | `SKILL_DMG_DEF` | 135.00 | Skill scaling from DEF |
 
 **Note:** The system does **NOT** apply `Potential_PET` to the Defense calculation.
+
+**Registry Integration:**
+- Registered via `@register_character("biscuit")`
+- Handler prompts for DEF_CHAR and DEF_PET input
+- Displays ATK and DEF parts separately
 
 **Functions:**
 - `calculate_biscuit_damage()` - Calculate split damage
@@ -594,25 +627,27 @@ sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
 
 ## 👾 Supported Characters
 
-| Character | Element | Class | Special Mechanics | Logic File |
-|-----------|---------|-------|-------------------|------------|
-| Biscuit | Dark | Support | Dual Scaling (ATK+DEF) | `logic/biscuit.py` |
-| Espada | Fire | Magic | HP-Based + Multi-scenario | `logic/espada.py` |
-| Freyja | Light | Magic | HP Alteration | `logic/freyja.py` |
-| Klahan | Wind | Attack | HP Condition Bonus | `logic/klahan.py` |
-| Miho | Water | Magic | Standard | - |
-| Pascal | Dark | Magic | Standard | - |
-| Rachel | Fire | Magic | DEF_REDUCE, DMG_AMP_DEBUFF | - |
-| Ryan | Dark | Attack | Lost HP + Weakness Extra | `logic/ryan.py` |
-| Sun Wukong | Fire | Balance | Castle Mode (min crits) | `logic/sun_wukong.py` |
-| Teo | Dark | Attack | Bonus Crit DMG | - |
-| Yeonhee | Dark | Magic | HP-Based | - |
+| Character | Element | Class | Special Mechanics | Registry Handler |
+|-----------|---------|-------|-------------------|------------------|
+| Biscuit | Dark | Support | Dual Scaling (ATK+DEF) | `@register_character("biscuit")` |
+| Espada | Fire | Magic | HP-Based + Multi-scenario | `@register_character("espada")` |
+| Freyja | Light | Magic | HP Alteration | `@register_character("freyja")` |
+| Klahan | Wind | Attack | HP Condition Bonus | `@register_character("klahan")` |
+| Miho | Water | Magic | Standard | (Uses default flow) |
+| Pascal | Dark | Magic | Standard | (Uses default flow) |
+| Rachel | Fire | Magic | DEF_REDUCE, DMG_AMP_DEBUFF | (Uses default flow) |
+| Ryan | Dark | Attack | Lost HP + Weakness Extra | `@register_character("ryan")` |
+| Sun Wukong | Fire | Balance | Castle Mode (min crits) | `@register_character("sun_wukong")` |
+| Teo | Dark | Attack | Bonus Crit DMG | (Uses default flow) |
+| Yeonhee | Dark | Magic | HP-Based | (Uses default flow) |
 
 ---
 
 ## 🧠 AI Agent Instructions
 
 ### Adding New Characters
+
+**Modern Approach (Registry Pattern):**
 
 1. **Get data from GameWith** → Use Enhanced values
 2. **Create JSON file** in `characters/`
@@ -621,13 +656,48 @@ sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
    - Has HP condition bonus? → Add appropriate fields
    - Has Bonus Crit DMG? → Use automatic mapping
    - Has Lost HP Bonus? → Create logic file
+   - Has Dual Scaling? → Create logic file with separate calculations
 4. **If has special logic:**
-   - Create file in `logic/`
-   - Add import and call in `main.py`
+   - Create file in `logic/[name].py`
+   - Implement handler function following `CharacterHandler` protocol
+   - Register in `character_registry.py` using `@register_character("name")`
+   - **NO NEED to modify `main.py`** - Registry handles it automatically!
 5. **Update `docs/SHOWCASES.md`:**
    - If has **special logic** → Add new showcase section
    - If **Standard** → Only add row to "Standard Characters" table
    - ⚠️ **Warning:** Don't add full showcase if no special mechanic (will be redundant)
+
+**Example:**
+```python
+# In character_registry.py
+
+@register_character("new_character")
+def handle_new_character(
+    total_atk: Decimal,
+    skill_dmg: Decimal,
+    crit_dmg: Decimal,
+    weak_dmg: Decimal,
+    dmg_amp_buff: Decimal,
+    dmg_amp_debuff: Decimal,
+    dmg_reduction: Decimal,
+    eff_def: Decimal,
+    skill_hits: int,
+    hp_target: Decimal,
+    config: dict[str, Any],
+    char_meta: dict[str, Any],
+    skill_config: dict[str, Any],
+    monster_preset: dict[str, Any] | None,
+) -> bool:
+    """Handler for New Character - Special Mechanic"""
+    # Your logic here
+    return True  # Indicates handled
+```
+
+**Benefits:**
+- ✅ No main.py modification required
+- ✅ Character logic self-contained
+- ✅ Easy to test individual handlers
+- ✅ Follows Open/Closed Principle
 
 ### File Modification Guide
 
@@ -671,6 +741,24 @@ python main.py           # Interactive mode
 ---
 
 ## 📝 Changelog
+
+### 2026-01-28: Modernization Refactor & Biscuit
+- **Added Biscuit character** - Dual Scaling (ATK + DEF) mechanics
+- **Implemented Registry Pattern**:
+  - Created `character_registry.py` for extensible character handling
+  - Replaced 160+ lines of if/elif chains with decorator-based registration
+  - Each character now self-registers its logic
+  - No main.py modification needed for new characters
+- **Modernized codebase:**
+  - Added `pyproject.toml` for modern Python project management
+  - Updated type hints to Python 3.10+ syntax (`X | Y` instead of `Union[X, Y]`)
+  - Removed unnecessary `from __future__ import annotations`
+  - Python requirement: 3.10+ (from 3.10+)
+- **Added test suite** - `test_all_characters.py` for integration testing
+- **Benefits:**
+  - More maintainable and testable
+  - Easier to extend with new characters
+  - Follows SOLID principles (Open/Closed)
 
 ### 2026-01-25: ATK Compare Mode
 - Changed mode 3 from "Calculate ATK only" to **"ATK Compare"**
