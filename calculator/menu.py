@@ -136,4 +136,26 @@ def select_skill(meta: dict[str, Any]) -> tuple[dict[str, Any], bool, list[dict[
     return skill_config, False, None
 
 
+def input_biscuit_stats(def_char_default: str, def_pet_default: str) -> tuple[Decimal, Decimal]:
+    """
+    Prompt for Biscuit's special DEF stats
+    Returns: (def_char, def_pet) as Decimals
+    """
+    from decimal import Decimal
+    
+    print("\n--- Biscuit Special Stats Input ---")
+    try:
+        in_def_char = input(f"Enter DEF_CHAR (Default {def_char_default}): ").strip()
+        def_char = Decimal(in_def_char) if in_def_char else Decimal(def_char_default)
+        
+        in_def_pet = input(f"Enter DEF_PET (Default {def_pet_default}): ").strip()
+        def_pet = Decimal(in_def_pet) if in_def_pet else Decimal(def_pet_default)
+    except ValueError as e:
+        print(f"Input Error: {e}. Using config values.")
+        def_char = Decimal(def_char_default)
+        def_pet = Decimal(def_pet_default)
+    
+    return def_char, def_pet
+
+
 

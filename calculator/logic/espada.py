@@ -3,15 +3,8 @@ Espada Special Logic
 เนื่องจาก Espada มี HP-based damage ที่ต้องคำนวณแยกและเปรียบเทียบ
 """
 
-from __future__ import annotations
-
 from decimal import Decimal
 from typing import Any
-import sys
-from pathlib import Path
-
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from damage_calc import (
     calculate_total_atk,

@@ -3,13 +3,6 @@
 Main Entry Point - ดึงทุก module มารัน
 """
 
-import sys
-import io
-
-# Fix encoding for Windows console (Thai text support)
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
-sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding="utf-8")
-
 from decimal import Decimal
 
 from damage_calc import (
@@ -23,7 +16,7 @@ from damage_calc import (
 )
 from constants import get_atk_base
 from config_loader import load_user_config, apply_weapon_set, merge_configs, get_decimal
-from menu import select_mode, select_character, select_skill
+from menu import select_mode, select_character, select_skill, input_biscuit_stats
 from atk_compare_mode import run_atk_compare_mode
 from display import (
     print_header,
@@ -190,23 +183,34 @@ def main():
             skill_config_for_handler = skill_config.copy()
             skill_config_for_handler["_is_both_skills"] = is_both_skills
 
-            # เรียกใช้ handler
-            handled = handler(
-                total_atk=total_atk,
-                skill_dmg=skill_dmg,
-                crit_dmg=crit_dmg,
-                weak_dmg=weak_dmg,
-                dmg_amp_buff=dmg_amp_buff,
-                dmg_amp_debuff=dmg_amp_debuff,
-                dmg_reduction=dmg_reduction,
-                eff_def=effective_def,
-                skill_hits=skill_hits,
-                hp_target=hp_target,
-                config=config_for_handler,
-                char_meta=char_meta,
-                skill_config=skill_config_for_handler,
-                monster_preset=monster_preset,
-            )
+            # เรียกใช้ handler - พิเศษสำหรับ Biscuit (ต้องกรอก DEF)
+            handler_kwargs = {
+                "total_atk": total_atk,
+                "skill_dmg": skill_dmg,
+                "crit_dmg": crit_dmg,
+                "weak_dmg": weak_dmg,
+                "dmg_amp_buff": dmg_amp_buff,
+                "dmg_amp_debuff": dmg_amp_debuff,
+                "dmg_reduction": dmg_reduction,
+                "eff_def": effective_def,
+                "skill_hits": skill_hits,
+                "hp_target": hp_target,
+                "config": config_for_handler,
+                "char_meta": char_meta,
+                "skill_config": skill_config_for_handler,
+                "monster_preset": monster_preset,
+            }
+            
+            # Biscuit special case: collect DEF input before calling handler
+            if char_name.lower() == "biscuit":
+                def_char_input, def_pet_input = input_biscuit_stats(
+                    config_for_handler["DEF_CHAR"],
+                    config_for_handler["DEF_PET"]
+                )
+                handler_kwargs["def_char"] = def_char_input
+                handler_kwargs["def_pet"] = def_pet_input
+            
+            handled = handler(**handler_kwargs)
 
             if handled:
                 return  # Handler จัดการเรียบร้อยแล้ว
@@ -238,4 +242,11 @@ def main():
 
 
 if __name__ == "__main__":
+    # Fix encoding for Windows console (Thai text support)
+    # Only apply when running as main script to avoid issues with imports
+    import sys
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding="utf-8")
+    
     main()

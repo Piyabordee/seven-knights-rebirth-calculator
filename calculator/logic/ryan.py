@@ -4,13 +4,8 @@ Ryan Special Logic - Lost HP Bonus & Weakness Extra Damage Calculator
 - WEAK_SKILL_DMG: ดาเมจเสริมเมื่อติดจุดอ่อน
 """
 
-from __future__ import annotations
-
 from decimal import Decimal, ROUND_DOWN
 from typing import Any
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from damage_calc import calculate_total_atk, calculate_raw_dmg, calculate_effective_def
 

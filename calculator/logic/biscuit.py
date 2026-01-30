@@ -1,17 +1,6 @@
 from decimal import Decimal
 from damage_calc import calculate_raw_dmg, calculate_final_dmg
-
-def calculate_total_def(def_char, def_pet):
-    """
-    คำนวณ Total DEF สำหรับ Biscuit (สูตรพิเศษ)
-    Total_DEF = DEF_CHAR + DEF_PET + (675 * 10.5 / 100)
-    Note: Formation bonus fixed at 10.5% (Frontline/Defense focus?)
-    Note: No BUFF_ATK multiplier for DEF part as requested.
-    """
-    # 675 is base defense for support/defense potentially, user provided constant
-    formation_bonus = Decimal("675") * Decimal("10.5") / Decimal("100")
-    total_def = def_char + def_pet + formation_bonus
-    return total_def
+from constants import DEF_BASE
 
 def calculate_biscuit_damage(
     total_atk: Decimal,
@@ -33,9 +22,9 @@ def calculate_biscuit_damage(
     """
     # Calculate Total DEF
     # Formula: DEF_CHAR + DEF_PET + (Base_DEF_Support * Formation_DEF% / 100)
-    # Base_DEF_Support (Legend) = 675
-    # Formation_DEF = 10.5 (Fixed per user request)
-    base_def_bonus = Decimal("675") * Decimal("10.5") / Decimal("100")
+    # Base_DEF_Support (Legend) = 675 from constants
+    # Formation_DEF = 10.5 (Fixed for Biscuit's special calculation)
+    base_def_bonus = DEF_BASE["legend"]["support"] * Decimal("10.5") / Decimal("100")
     total_def = def_char + def_pet + base_def_bonus
     
     # 2. RAW DMG 1 (ATK Based)

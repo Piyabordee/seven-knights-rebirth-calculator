@@ -3,13 +3,8 @@ Freyja Special Logic - HP Alteration Calculator
 HP Alteration = ปรับ HP เป้าหมายเหลือ X% (ไม่ใช่เพิ่มดาเมจ)
 """
 
-from __future__ import annotations
-
 from decimal import Decimal, ROUND_DOWN
 from typing import Any
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from damage_calc import calculate_total_atk, calculate_raw_dmg, calculate_effective_def
 

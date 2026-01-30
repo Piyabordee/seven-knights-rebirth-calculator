@@ -35,3 +35,9 @@ ENV/
 
 # Project Local Config (User specific)
 calculator/config.json
+
+# Test Reports
+.pytest_cache/
+.coverage
+htmlcov/
+test_reports/

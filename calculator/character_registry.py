@@ -337,28 +337,17 @@ def handle_biscuit(
     char_meta: dict[str, Any],
     skill_config: dict[str, Any],
     monster_preset: dict[str, Any] | None,
+    def_char: Decimal | None = None,
+    def_pet: Decimal | None = None,
 ) -> bool:
     """Handler สำหรับ Biscuit - ใช้ Dual Scaling ATK + DEF logic"""
     from decimal import Decimal as D
     from logic.biscuit import calculate_biscuit_damage, print_biscuit_results
+    from config_loader import get_decimal
 
-    # อ่านค่า DEF_CHAR, DEF_PET จาก config
-    print("\n--- Biscuit Special Stats Input ---")
-    try:
-        default_def_char = config.get("DEF_CHAR", "0")
-        in_def_char = input(f"Enter DEF_CHAR (Default {default_def_char}): ").strip()
-        def_char = D(in_def_char) if in_def_char else D(str(default_def_char))
-
-        default_def_pet = config.get("DEF_PET", "0")
-        in_def_pet = input(f"Enter DEF_PET (Default {default_def_pet}): ").strip()
-        def_pet = D(in_def_pet) if in_def_pet else D(str(default_def_pet))
-    except ValueError as e:
-        print(f"Input Error: {e}. Using config values.")
-        from config_loader import get_decimal
-
-        def_char = get_decimal(config, "DEF_CHAR", "0")
-        def_pet = get_decimal(config, "DEF_PET", "0")
-
+    # Use provided values or fallback to config
+    def_char = def_char if def_char is not None else get_decimal(config, "DEF_CHAR", "0")
+    def_pet = def_pet if def_pet is not None else get_decimal(config, "DEF_PET", "0")
     skill_dmg_from_def = config.get("SKILL_DMG_DEF", D("0"))
 
     result = calculate_biscuit_damage(
