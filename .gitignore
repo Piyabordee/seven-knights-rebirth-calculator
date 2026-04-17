@@ -43,3 +43,4 @@ calculator/config.json
 .coverage
 htmlcov/
 test_reports/
+/.obsidian
