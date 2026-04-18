@@ -337,6 +337,6 @@ A feature is "test complete" when:
 ## 📞 Contact
 
 For questions about this test strategy, please refer to:
-- `AGENTS.md` - AI agent guide
+- `CLAUDE.md` - Project hub for AI agents
 - `README.md` - User documentation
 - `SHOWCASES.md` - Expected output examples

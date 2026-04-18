@@ -106,7 +106,7 @@ Handlers can have additional keyword arguments (e.g., Biscuit accepts `def_char`
 
 ### Standard character (no special logic)
 
-1. Create `calculator/characters/[name].json` following the template in [[AGENTS]]
+1. Create `calculator/characters/[name].json` following the template in [[GAMEWITH_GUIDE]]
 2. Done — the character uses the default calculation pipeline automatically
 
 ### Character with special logic
@@ -118,8 +118,8 @@ Handlers can have additional keyword arguments (e.g., Biscuit accepts `def_char`
 5. Update [[docs/SHOWCASES]] if the character has a special mechanic
 6. Add tests in `calculator/tests/`
 
-For detailed character JSON structure, see [[AGENTS]] and [[docs/reference/config-reference]].
+For detailed character JSON structure, see [[GAMEWITH_GUIDE]] and [[docs/reference/config-reference]].
 
 ---
 
-Related: [[docs/architecture/damage-pipeline]] | [[docs/reference/config-reference]] | [[AGENTS]]
+Related: [[docs/architecture/damage-pipeline]] | [[docs/reference/config-reference]] | [[GAMEWITH_GUIDE]]

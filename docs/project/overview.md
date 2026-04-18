@@ -47,7 +47,7 @@ Target users: end-game players optimizing damage, guild strategists planning Cas
 
 This project was built with ~90% AI assistance. The human author handles game mechanics research, logic formulation, and result verification. AI handles code architecture, implementation, refactoring, and documentation.
 
-See [[AGENTS]] for the comprehensive AI agent guide including formulas, patterns, and extension instructions.
+See [[docs/_index]] for full documentation including formulas, patterns, and extension instructions.
 
 ---
 

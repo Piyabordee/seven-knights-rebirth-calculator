@@ -59,15 +59,11 @@ Three config layers are merged in order:
 
 ### Additive Keys (values are SUMMED)
 
-When a key appears in both character and user config, values are **added**:
-
-```
-SKILL_DMG, CRIT_DMG, WEAK_DMG, DMG_AMP_BUFF, DMG_AMP_DEBUFF,
-DEF_REDUCE, BUFF_ATK, DMG_Reduction, Ignore_DEF,
-Bonus_DMG_HP_Target, Cap_ATK_Percent
-```
+When a key appears in both character and user config, values are **added** (e.g., `SKILL_DMG`, `CRIT_DMG`, `WEAK_DMG`, etc.).
 
 Example: Miho has passive `WEAK_DMG=23`. User config has `WEAK_DMG=35`. Final: `23 + 35 = 58`.
+
+See [[docs/reference/config-reference]] for the full list of additive and mapping keys.
 
 ### Mapping Keys (redirected to another key)
 
@@ -77,15 +73,7 @@ Example: Miho has passive `WEAK_DMG=23`. User config has `WEAK_DMG=35`. Final: `
 
 ### Weapon Set Bonuses
 
-Applied before merging, directly modifying the user config:
-
-| Weapon Set | Effect |
-|-----------|--------|
-| 0 | None |
-| 1 | `WEAK_DMG += 35` |
-| 2 | `Ignore_DEF += 15` |
-| 3 | `DMG_AMP_BUFF += 70` |
-| 4 | `DMG_AMP_BUFF += 30` |
+Applied before merging, directly modifying the user config. See [[docs/reference/config-reference]] for full weapon set table.
 
 ## 4-Scenario System
 

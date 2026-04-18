@@ -280,7 +280,7 @@ mypy calculator/
 
 - **Test Strategy:** See [TEST_STRATEGY.md](calculator/tests/TEST_STRATEGY.md)
 - **Test README:** See [README.md](calculator/tests/README.md)
-- **Agent Guide:** See [AGENTS.md](AGENTS.md)
+- **Agent Guide:** See [CLAUDE.md](../../CLAUDE.md)
 - **User Docs:** See [README.md](README.md)
 
 ---
@@ -318,7 +318,7 @@ calculator/tests/
 
 For questions about the test suite:
 1. Check [TEST_STRATEGY.md](calculator/tests/TEST_STRATEGY.md)
-2. Review [AGENTS.md](AGENTS.md) for agent guidelines
+2. Review [CLAUDE.md](../../CLAUDE.md) for agent guidelines
 3. Run `pytest --help` for pytest options
 
 ---

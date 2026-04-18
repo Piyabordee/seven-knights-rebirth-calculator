@@ -9,7 +9,6 @@
 
 - [[CLAUDE]] — Project hub (AI agents read this first)
 - [[README]] — User-facing introduction and installation
-- [[AGENTS]] — Comprehensive AI agent guide (deep reference)
 
 ---
 
@@ -41,7 +40,6 @@ These docs are preserved outside the docs/ structure:
 
 | Doc | Description |
 |-----|-------------|
-| [[AGENTS]] | Comprehensive AI agent guide — formulas, mechanics, lessons learned, changelog |
 | [[README]] | User-facing: installation, usage, features, testing |
 | [[GAMEWITH_GUIDE]] | How to extract character data from GameWith |
 | [[docs/SHOWCASES]] | Character output examples with real calculator results |

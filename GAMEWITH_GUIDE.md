@@ -363,7 +363,7 @@ Skill 1: Violent Dance
    - Create `logic/[name].py` file
    - Implement handler function
    - Register in `character_registry.py` with `@register_character("name")`
-   - Update `AGENTS.md` and `docs/SHOWCASES.md`
+   - Update `docs/SHOWCASES.md`
 
 4. **Verify correctness:**
    - Run `python test_all_characters.py` to test
@@ -399,6 +399,6 @@ Skill 1: Violent Dance
 
 ## 📚 References
 
-- **AGENTS.md** - Main documentation for AI Agents
+- **CLAUDE.md** - Project hub for AI Agents
 - **calculator/character_registry.py** - Registry pattern implementation
 - **calculator/logic/** - Special logic examples

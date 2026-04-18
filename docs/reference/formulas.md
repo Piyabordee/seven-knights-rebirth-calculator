@@ -160,4 +160,4 @@ All final values use `Decimal.quantize(Decimal("1"), rounding=ROUND_DOWN)`. This
 
 ---
 
-Related: [[docs/architecture/damage-pipeline]] | [[docs/reference/config-reference]] | [[AGENTS]]
+Related: [[docs/architecture/damage-pipeline]] | [[docs/reference/config-reference]] | [[docs/architecture/module-system]]

@@ -7,13 +7,7 @@
 
 ## Identity
 
-| Field | Value |
-|-------|-------|
-| Name | 7k Rebirth Damage Calculator |
-| Type | CLI damage calculator for Seven Knights Rebirth |
-| Stack | Python 3.10+ (stdlib only, `Decimal` precision) |
-| Version | 2.2.0 |
-| Repo | github.com/Piyabordee/7k-rebirth-calculator |
+See [[docs/project/overview]] for full project identity, purpose, and stack.
 
 ---
 
@@ -21,7 +15,6 @@
 
 - [[docs/_index]] — Full documentation map
 - [[docs/project/overview]] — Project identity and stack
-- [[AGENTS]] — Comprehensive agent guide (formulas, mechanics, patterns)
 - [[README]] — User-facing introduction
 
 ---
@@ -72,21 +65,7 @@ When creating or significantly modifying a feature:
 
 ## Documentation Map
 
-### Project
-- [[docs/project/overview]] — Project identity, purpose, stack, characters
-
-### Architecture
-- [[docs/architecture/module-system]] — Module responsibilities, Registry Pattern, extension guide
-- [[docs/architecture/damage-pipeline]] — End-to-end calculation flow and 4-scenario system
-
-### Reference
-- [[docs/reference/formulas]] — Core damage formulas with gotchas
-- [[docs/reference/config-reference]] — All config fields, types, defaults, effects
-
-### Existing Docs
-- [[AGENTS]] — Comprehensive AI agent guide (deep reference)
-- [[docs/SHOWCASES]] — Character output examples
-- [[GAMEWITH_GUIDE]] — Data extraction from GameWith
+See [[docs/_index]] for the full documentation index with all project, architecture, and reference docs.
 
 ---
 
@@ -99,4 +78,4 @@ When creating or significantly modifying a feature:
 
 ---
 
-Related: [[docs/_index]] | [[AGENTS]] | [[README]]
+Related: [[docs/_index]] | [[README]]
