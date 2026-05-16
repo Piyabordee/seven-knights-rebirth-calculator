@@ -30,17 +30,30 @@ ENV/
 # IDEs
 .idea/
 .vscode/
-.claude/
-.github/
 *.swp
 *.swo
+
+# Windows
+Thumbs.db
+Desktop.ini
+desktop.ini
+DS_Store
 
 # Project Local Config (User specific)
 calculator/config.json
 
-# Test Reports
+# Test / Coverage
 .pytest_cache/
 .coverage
 htmlcov/
 test_reports/
-/.obsidian
+
+# Obsidian
+.obsidian/
+
+# Claude Code
+.claude/settings.local.json
+.claude/scheduled_tasks.json
+
+# GitHub
+.github/

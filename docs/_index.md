@@ -8,6 +8,10 @@
 ## Quick Links
 
 - [[CLAUDE]] — Project hub (AI agents read this first)
+- [[.claude/rules/stable-rules]] — Non-negotiable project constraints
+- [[.claude/rules/security-rules]] — Security policy
+- [[.claude/rules/coding-behavior-rules]] — Coding behavior guidelines
+- [[decisions]] — Design rationale & tradeoff log
 - [[README]] — User-facing introduction and installation
 
 ---
@@ -25,6 +29,24 @@
 | [[docs/architecture/module-system]] | Module responsibilities, Registry Pattern, and how to add new characters |
 | [[docs/architecture/damage-pipeline]] | End-to-end calculation flow: config merge → 4 scenarios → display |
 
+## Features
+
+| Doc | Description |
+|-----|-------------|
+| [[docs/features/character-mechanics]] | 6 special character mechanics: activation conditions, formulas, and logic modules |
+
+## Integrations
+
+| Doc | Description |
+|-----|-------------|
+| [[docs/integrations/gamewith-data]] | GameWith data sourcing: how character data flows from website to JSON |
+
+## Testing
+
+| Doc | Description |
+|-----|-------------|
+| [[docs/testing/strategy]] | Test approach, conventions, coverage goals, and test file map |
+
 ## Reference
 
 | Doc | Description |
@@ -36,21 +58,22 @@
 
 ## Existing Documentation
 
-These docs are preserved outside the docs/ structure:
+These docs are preserved outside the standard category structure:
 
 | Doc | Description |
 |-----|-------------|
 | [[README]] | User-facing: installation, usage, features, testing |
 | [[GAMEWITH_GUIDE]] | How to extract character data from GameWith |
 | [[docs/SHOWCASES]] | Character output examples with real calculator results |
+| [[decisions]] | Design rationale and tradeoff log |
 
 ### Test Documentation
 
 | Doc | Description |
 |-----|-------------|
-| [TEST_STRATEGY.md](calculator/tests/TEST_STRATEGY.md) | Test strategy, coverage matrix, objectives |
-| [TEST_SUITE_SUMMARY.md](calculator/tests/TEST_SUITE_SUMMARY.md) | Test suite overview and statistics |
-| [tests/README.md](calculator/tests/README.md) | Test documentation and instructions |
+| `calculator/tests/TEST_STRATEGY.md` [[calculator/tests/TEST_STRATEGY]] | Detailed test strategy, coverage matrix, objectives |
+| `calculator/tests/TEST_SUITE_SUMMARY.md` [[calculator/tests/TEST_SUITE_SUMMARY]] | Test suite overview and statistics |
+| `calculator/tests/README.md` [[calculator/tests/README]] | Test documentation and instructions |
 
 ---
 
@@ -60,5 +83,4 @@ These docs are preserved outside the docs/ structure:
 - **Formula Credits** — BelXenonZ and AcidAqua (damage calculation formulas)
 
 ---
-
-Related: [[CLAUDE]] | [[docs/project/overview]]
+Related: [[CLAUDE]] | [[docs/project/overview]] | [[decisions]]

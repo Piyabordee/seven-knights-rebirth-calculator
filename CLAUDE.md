@@ -13,6 +13,9 @@ See [[docs/project/overview]] for full project identity, purpose, and stack.
 
 ## Read First
 
+- [[.claude/rules/stable-rules]] — Non-negotiable project constraints (read BEFORE writing code)
+- [[.claude/rules/security-rules]] — Security policy
+- [[.claude/rules/coding-behavior-rules]] — Coding behavior (think first, simplicity, surgical changes)
 - [[docs/_index]] — Full documentation map
 - [[docs/project/overview]] — Project identity and stack
 - [[README]] — User-facing introduction
@@ -31,15 +34,84 @@ mypy calculator/ --ignore-missing-imports       # Type check
 
 ---
 
-## Working Rules
+## Stable Rules
 
-1. **Use `Decimal` everywhere** — Never use `float` for damage math. Import from `decimal`.
-2. **Base weakness is 30%** — Weakness damage = `30 + WEAK_DMG`, not just WEAK_DMG. See [[docs/reference/formulas]].
-3. **Config values are additive** — Character + user values get summed for additive keys (SKILL_DMG, CRIT_DMG, etc.). See [[docs/reference/config-reference]].
-4. **Damage is per-hit** — Final damage formula produces per-hit values. Multiply by `SKILL_HITS` for totals.
-5. **ROUNDDOWN always** — Use `Decimal.quantize(Decimal("1"), rounding=ROUND_DOWN)`.
-6. **Use the Registry** — New characters with special logic: create `logic/[name].py`, register with `@register_character("name")`. Do NOT modify `main.py`. See [[docs/architecture/module-system]].
-7. **No `sys.path` manipulation** — Modules are run from `calculator/` as working directory.
+Three rule files govern this project (all in `.claude/rules/`):
+
+- [[.claude/rules/stable-rules]] — 7 non-negotiable project constraints. Summary:
+
+1. Use `Decimal` everywhere (never `float`)
+2. Base weakness is 30%
+3. Config values are additive
+4. Damage is per-hit
+5. ROUNDDOWN always
+6. Use the Registry for new characters
+7. No `sys.path` manipulation
+
+- [[.claude/rules/security-rules]] — Never commit secrets, never exfiltrate code, validate security impact
+- [[.claude/rules/coding-behavior-rules]] — Think before coding, simplicity first, surgical changes, goal-driven execution
+
+---
+
+## Directory Tree (Authoritative)
+
+```
+7k-project/
+├── .claude/rules/
+│   ├── stable-rules.md                # Non-negotiable project constraints
+│   ├── security-rules.md              # Security policy
+│   └── coding-behavior-rules.md       # Coding behavior guidelines
+├── CLAUDE.md                            # This file — AI agent hub
+├── decisions.md                         # Design rationale & tradeoff log
+├── README.md                            # User-facing introduction
+├── GAMEWITH_GUIDE.md                    # Character data extraction guide
+├── pyproject.toml                       # Build config (Python 3.10+, stdlib only)
+├── pytest.ini                           # Test configuration
+├── docs/
+│   ├── _index.md                        # Navigation hub
+│   ├── SHOWCASES.md                     # Character output examples
+│   ├── project/overview.md              # Project identity
+│   ├── architecture/
+│   │   ├── module-system.md             # Module map & Registry Pattern
+│   │   └── damage-pipeline.md           # End-to-end calculation flow
+│   ├── features/
+│   │   └── character-mechanics.md       # 6 special character mechanics
+│   ├── integrations/
+│   │   └── gamewith-data.md             # GameWith data sourcing workflow
+│   ├── testing/
+│   │   └── strategy.md                  # Test approach & conventions
+│   └── reference/
+│       ├── formulas.md                  # Core formulas with gotchas
+│       └── config-reference.md          # All config fields
+└── calculator/
+    ├── main.py                          # Entry point + orchestrator
+    ├── character_registry.py            # Registry + 6 handlers
+    ├── config_loader.py                 # JSON loading, merging, weapon sets
+    ├── constants.py                     # ATK/DEF/HP base lookup tables
+    ├── damage_calc.py                   # Pure calculation functions
+    ├── menu.py                          # CLI menu interactions
+    ├── display.py                       # Output formatting
+    ├── atk_compare_mode.py              # ATK Comparison mode
+    ├── logic/                           # Special character logic (6 modules)
+    ├── characters/                      # Character data JSONs (14 files)
+    │   └── monster/                     # Monster presets (3 files)
+    ├── config.json                      # User's live configuration
+    └── tests/                           # Test suite (6 files)
+```
+
+---
+
+## Task Routing
+
+| Task | Read these docs first |
+|------|----------------------|
+| Add a standard character | `docs/reference/config-reference.md` [[docs/reference/config-reference]], `GAMEWITH_GUIDE.md` [[GAMEWITH_GUIDE]] |
+| Add a character with special logic | `docs/architecture/module-system.md` [[docs/architecture/module-system]], `docs/features/character-mechanics.md` [[docs/features/character-mechanics]], `.claude/rules/stable-rules.md` [[.claude/rules/stable-rules]] |
+| Fix a formula bug | `docs/reference/formulas.md` [[docs/reference/formulas]], `docs/architecture/damage-pipeline.md` [[docs/architecture/damage-pipeline]] |
+| Update character data from GameWith | `docs/integrations/gamewith-data.md` [[docs/integrations/gamewith-data]], `GAMEWITH_GUIDE.md` [[GAMEWITH_GUIDE]] |
+| Add or modify tests | `docs/testing/strategy.md` [[docs/testing/strategy]] |
+| Understand a design choice | `decisions.md` [[decisions]] |
+| Onboard to the project | `docs/project/overview.md` [[docs/project/overview]], `docs/_index.md` [[docs/_index]] |
 
 ---
 
@@ -58,6 +130,8 @@ When creating or significantly modifying a feature:
 |----------|------|------|
 | Feature workflow | `docs/features/` | New user-facing behavior |
 | Architecture | `docs/architecture/` | Structural changes |
+| Integration | `docs/integrations/` | External tool workflows |
+| Testing | `docs/testing/` | Test strategy changes |
 | Reference | `docs/reference/` | New constants, config options |
 | Project | `docs/project/` | Known issues, project changes |
 
@@ -65,7 +139,7 @@ When creating or significantly modifying a feature:
 
 ## Documentation Map
 
-See [[docs/_index]] for the full documentation index with all project, architecture, and reference docs.
+See [[docs/_index]] for the full documentation index with all project, architecture, feature, integration, testing, and reference docs.
 
 ---
 
@@ -78,4 +152,4 @@ See [[docs/_index]] for the full documentation index with all project, architect
 
 ---
 
-Related: [[docs/_index]] | [[README]]
+Related: [[docs/_index]] | [[.claude/rules/stable-rules]] | [[.claude/rules/security-rules]] | [[.claude/rules/coding-behavior-rules]] | [[decisions]] | [[README]]
